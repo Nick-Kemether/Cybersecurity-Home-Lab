@@ -1,0 +1,45 @@
+<!--
+  Custom rules I wrote after running attack simulations in the lab.
+  Added to /var/ossec/etc/rules/local_rules.xml on the Wazuh manager.
+  
+  Both rules are extensions of built-in detections -- tuned based on 
+  what I actually saw in the logs rather than written from scratch.
+-->
+
+<group name="custom_detections,">
+
+  <!-- 
+    Fires when the same source IP triggers repeated SSH auth failures.
+    Built on top of rule 5760 which catches individual failures.
+    The goal was to reduce noise from one-off typos while still
+    escalating anything that looks like a tool running.
+    Maps to T1110.001.
+  -->
+  <rule id="100001" level="10">
+    <if_matched_sid>5760</if_matched_sid>
+    <same_source_ip />
+    <description>Repeated SSH failures from same source - possible brute force T1110.001</description>
+    <mitre>
+      <id>T1110.001</id>
+    </mitre>
+    <group>brute_force,authentication_failed</group>
+  </rule>
+
+  <!--
+    Catches Suricata network scan alerts and surfaces them in Wazuh
+    under a consistent group so they're easy to hunt for.
+    Only works after Suricata eve.json is added to ossec.conf as
+    a monitored log source -- that step is documented in notes.md.
+    Maps to T1046.
+  -->
+  <rule id="100002" level="8">
+    <if_sid>86601</if_sid>
+    <match>ET SCAN</match>
+    <description>Network scan detected via Suricata - T1046</description>
+    <mitre>
+      <id>T1046</id>
+    </mitre>
+    <group>network_scan,recon</group>
+  </rule>
+
+</group>
