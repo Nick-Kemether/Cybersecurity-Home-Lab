@@ -1,43 +1,33 @@
-# Security Operations Lab
+# Cybersecurity Home Lab
 
-A collection of hands-on security operations exercises built around a home lab running Wazuh SIEM, Kali Linux, OPNsense, and Docker. Built to practice the core disciplines of a security operations role: threat detection, incident response, threat hunting, and adversary emulation.
+I built this to get real hands-on experience with the tools and workflows that come up in security operations roles. I'm a cybersecurity analyst and wanted to go deeper on the technical side — detection engineering, threat hunting, incident response, and web app security.
 
----
-
-## Lab Environment
-
-| Component | Role |
-|---|---|
-| Wazuh SIEM (Ubuntu 22.04) | Log ingestion, detection, alerting |
-| Suricata IDS | Network-level intrusion detection |
-| Kali Linux | Attack simulation and adversary emulation |
-| OPNsense | Firewall and network segmentation |
-| Docker + nginx | Containerized web server target |
-| Atomic Red Team | MITRE ATT&CK technique emulation |
+Most of this was built across two laptops with 8GB RAM each, which meant I had to be deliberate about resources and learned a lot just from making things work under those constraints.
 
 ---
 
-## Exercises
+## What I'm Running
 
-| Folder | What's Inside |
-|---|---|
-| `atomic-red-team/` | Adversary emulation setup and findings |
-| `wazuh-detection-rules/` | Custom detection rules authored from findings |
-| `ir-runbooks/` | Incident response runbooks following SANS PICERL |
-| `threat-hunting/` | Threat hunt queries and methodology |
+**MacBook:**
+- Wazuh SIEM on Ubuntu 22.04 — main detection platform
+- Kali Linux — attack simulations
 
----
-
-## Skills Demonstrated
-
-- SIEM deployment and custom detection development
-- Adversary emulation using MITRE ATT&CK framework
-- Network intrusion detection with Suricata
-- Incident response documentation (SANS PICERL)
-- Network segmentation and firewall rule configuration
-- Web application vulnerability assessment (OWASP Top 10)
-- Container deployment and security
+**Windows Laptop:**
+- Ubuntu + Docker — containerized web server target
+- OPNsense — firewall between the web server and the network
+- Suricata — network IDS feeding alerts into Wazuh
 
 ---
 
-*Nick Kemether — Cybersecurity Analyst*
+## What's In This Repo
+
+- `wazuh-siem/` — detection rules, findings, gap analysis
+- `dvwa-testing/` — web app vulnerability testing notes
+- `ir-runbooks/` — response documentation for attacks I've simulated
+- `threat-hunting/` — hunt hypotheses, queries, results
+
+---
+
+## Tools
+
+Wazuh, Suricata, Kali Linux, Hydra, Nmap, OPNsense, Docker, nginx, DVWA, Atomic Red Team
